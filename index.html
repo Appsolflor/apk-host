@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Download MyApp</title>
+  <title>HB App Download</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -12,81 +13,213 @@
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f3f4f6;
+      font-family: 'Inter', sans-serif;
+      background: #f9fafb;
       color: #111827;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
     }
 
-    .container {
+    a {
+      text-decoration: none;
+    }
+
+    /* ======= NAVBAR ======= */
+    .navbar {
       background: white;
-      padding: 40px 30px;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+      position: relative;
+    }
+
+    .navbar .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .navbar .logo img {
+      height: 40px;
+    }
+
+    .navbar .logo span {
+      font-weight: 700;
+      font-size: 20px;
+      color: #047857;
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border: 2px solid #047857;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .menu-toggle div {
+      height: 3px;
+      background: #047857;
+      margin: 4px 0;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: #374151;
+      font-weight: 500;
+      padding: 8px;
+    }
+
+    .nav-links a.button {
+      background: #047857;
+      color: white;
+      border-radius: 6px;
+      padding: 8px 16px;
+    }
+
+    /* ======= HERO SECTION ======= */
+    .hero {
+      padding: 60px 20px;
       text-align: center;
-      max-width: 400px;
-      width: 100%;
     }
 
-    .logo {
-      width: 100px;
-      height: 100px;
-      object-fit: contain;
-      margin-bottom: 20px;
-    }
-
-    .app-name {
+    .hero h1 {
       font-size: 28px;
       font-weight: 700;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+      color: #047857;
     }
 
-    .sub-text {
+    .hero p {
       font-size: 16px;
       color: #6b7280;
-      margin-bottom: 30px;
+      max-width: 600px;
+      margin: 0 auto 30px;
     }
 
     .download-btn {
-      display: inline-block;
-      padding: 12px 24px;
-      font-size: 16px;
-      background: #3b82f6;
+      background: #047857;
       color: white;
-      border: none;
+      padding: 14px 28px;
+      font-size: 16px;
       border-radius: 8px;
-      text-decoration: none;
-      transition: background 0.3s ease;
+      display: inline-block;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: background 0.3s;
     }
 
     .download-btn:hover {
-      background: #2563eb;
+      background: #065f46;
     }
 
-    @media (max-width: 500px) {
-      .app-name {
-        font-size: 24px;
+    #download-msg {
+      margin-top: 16px;
+      color: #047857;
+      font-weight: 500;
+      display: none;
+    }
+
+    .preview {
+      margin-top: 40px;
+    }
+
+    .preview img {
+      max-width: 90%;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    }
+
+    /* ======= MOBILE MENU ======= */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
       }
-      .sub-text {
-        font-size: 14px;
+
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 16px 24px;
+        gap: 10px;
+        display: none;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
       }
-      .download-btn {
-        font-size: 14px;
-        padding: 10px 20px;
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .nav-links a {
+        width: 100%;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <img src="logo.png" alt="App Logo" class="logo" />
-    <h1 class="app-name">MyApp</h1>
-    <p class="sub-text">A smarter way to experience your mobile world</p>
-    <a href="./myapp.apk" class="download-btn" download>Download APK</a>
-  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="logo.png" alt="Logo">
+      <span>HBL Mobile</span>
+    </div>
+
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+    <div class="nav-links" id="navLinks">
+      <a href="#">Highlights</a>
+      <a href="#">Preview</a>
+      <a href="#">Get App</a>
+      <a href="#" class="button">Reach Out</a>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <h1>HBL Mоbіlе Ваnkіng</h1>
+    <p>Еnjоy hаsslе-frее bаnkіng аnywhеrе wіth HBL Mоbіlе – yоur аll-іn-оnе fіnаncіаl аpp оn thе gо.</p>
+
+    <!-- Download Button with message -->
+    <a href="myapp.apk" class="download-btn" download onclick="showDownloadMessage()">📥 Download App</a>
+    <p id="download-msg">✅ Your download is starting...</p>
+
+    <!-- Image Preview -->
+    <div class="preview">
+      <img src="preview.png" alt="App Screenshot">
+    </div>
+  </section>
+
+  <!-- Scripts -->
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('navLinks');
+      nav.classList.toggle('show');
+    }
+
+    function showDownloadMessage() {
+      const msg = document.getElementById("download-msg");
+      msg.style.display = "block";
+
+      setTimeout(() => {
+        msg.style.display = "none";
+      }, 4000); // Hide message after 4 seconds
+    }
+  </script>
+
 </body>
 </html>
